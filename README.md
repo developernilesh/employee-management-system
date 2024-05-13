@@ -1,0 +1,1 @@
+This is a full stack Employee Management Sysytem App built using MERN stack 

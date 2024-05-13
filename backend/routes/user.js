@@ -1,8 +1,9 @@
 const express= require("express")
 const userRouter = express.Router()
 
-userRouter.get('/use',(req,res) => {
-    res.json('hello user')
-})
+const {getUserInfo,updateUser} = require('../Controllers/Users')
+
+userRouter.get('/info',getUserInfo)
+userRouter.put('/updateUser',updateUser)
 
 module.exports = userRouter;

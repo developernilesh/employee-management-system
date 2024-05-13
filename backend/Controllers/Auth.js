@@ -5,7 +5,7 @@ require('dotenv').config()
 
 exports.signup = async(req,res) => {
     try {
-      // get data
+        // get data
         const {name,email,password} = req.body;
         // check if user already exists
         const existingUser = await User.findOne({email});
@@ -74,6 +74,7 @@ exports.login = async(req,res) => {
 
         // verify password and generate a JWT token
         const payload = {
+            name:user.name,
             email:user.email,
             id:user._id,
         }
@@ -115,6 +116,44 @@ exports.login = async(req,res) => {
         res.status(500).json({
             success:false,
             message:'Login failure'
+        })
+    }
+}
+
+exports.logout = async(req,res) => {
+    try {
+        res.clearCookie('token')
+        return res.status(200).json({
+            "success":true,
+            "message":"Logged Out Successfully"
+        })
+    } catch (error) {
+        console.error(error)
+        return res.status(401).json({
+            "success":false,
+            "message":"Logout Error"
+        })
+    }
+}
+
+exports.isLoggedin = async(req,res) => {
+    try {
+        const token = req.cookies.token
+        if(!token){
+            return res.json(false)
+        }
+
+        const isVerified = jwt.verify(token,process.env.JWT_SECRET)
+        if(!isVerified){
+            return res.json(false)
+        }
+        return res.json(true)
+
+    } catch (error) {
+        console.error(error)
+        return res.status(401).json({
+            "success":false,
+            "message":"Logged In verification error"
         })
     }
 }

@@ -15,10 +15,15 @@ const employeSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    gender:{
+        type:String,
+        enum:["Male","Female","Other"],
+        required:true
+    },
     user:{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true,
+        required:true
     }
 },{timestamps:true})
 
