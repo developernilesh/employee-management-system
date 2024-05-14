@@ -56,7 +56,7 @@ exports.login = async(req,res) => {
         const {email,password} = req.body
 
         if(!email || !password){
-            return res.status(400).json({
+            return res.status(401).json({
                 success:false,
                 message:'Please fill all the details'
             })
@@ -66,9 +66,9 @@ exports.login = async(req,res) => {
         let user = await User.findOne({email})
 
         if(!user){
-            res.status(401).json({
+            return res.status(401).json({
                 success:false,
-                message:'User is not registered'
+                message:'User is not registered, please check your email'
             })
         }
 
@@ -107,7 +107,7 @@ exports.login = async(req,res) => {
             // password do not match
             return res.status(403).json({
                 success:false,
-                message:'Password incorrect'
+                message:'You have entered incorrect password'
             })
         }
     } 
@@ -144,6 +144,7 @@ exports.isLoggedin = async(req,res) => {
         }
 
         const isVerified = jwt.verify(token,process.env.JWT_SECRET)
+        
         if(!isVerified){
             return res.json(false)
         }

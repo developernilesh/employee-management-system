@@ -12,7 +12,8 @@ exports.createEmployee = async(req,res) => {
         }
 
         const employee = await Employee.create({
-            name,email,phn,gender
+            name,email,phn,gender,
+            user:req.user.id
         })
 
         return res.status(200).json({
@@ -66,8 +67,7 @@ exports.getCurrentUserEmployees = async(req,res) => {
             })
         }
 
-        const currentUserEmployees = await Employee.find({})
-        console.log(currentUserEmployees);
+        const currentUserEmployees = await Employee.find({user:req.user.id})
 
         if(!currentUserEmployees){
             return res.status(401).json({
@@ -98,6 +98,22 @@ exports.updateEmployee = async(req,res) => {
             return res.status(401).json({
                 success:false,
                 message:"Can't get Employee Id"
+            })
+        }
+
+        const verifiedEmployee = await Employee.findById(employeeId).exec()
+
+        if(!verifiedEmployee){
+            return res.status(401).json({
+                success:false,
+                message:"No employee found"
+            })
+        }
+
+        if(verifiedEmployee.user.toString() !== req.user.id){
+            return res.status(401).json({
+                success:false,
+                message:"It is not the employee added by the user"
             })
         }
 
@@ -137,6 +153,22 @@ exports.deleteEmployee = async(req,res) => {
             return res.status(401).json({
                 success:false,
                 message:"Can't get Employee Id"
+            })
+        }
+
+        const verifiedEmployee = await Employee.findById(employeeId).exec()
+
+        if(!verifiedEmployee){
+            return res.status(401).json({
+                success:false,
+                message:"No employee found"
+            })
+        }
+
+        if(verifiedEmployee.user.toString() !== req.user.id){
+            return res.status(401).json({
+                success:false,
+                message:"It is not the employee added by the user"
             })
         }
 
