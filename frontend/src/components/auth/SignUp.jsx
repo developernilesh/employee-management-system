@@ -9,9 +9,11 @@ const SignUp = () => {
     const { register, handleSubmit } = useForm()
     const navigate = useNavigate()
 
+    const url = `${String(import.meta.env.VITE_BACKEND_URL)}`
+
     const Signup = async(data) => {
         try {
-            const res = await axios.post('/api/auth/signup', {...data})
+            const res = await axios.post(`${url}/api/auth/signup`,{...data})
             console.log("form response: ",res);
             navigate('/login')
             toast.success("Account created successfully")
@@ -21,8 +23,8 @@ const SignUp = () => {
     }
 
     return (
-        <Layout>
-            <div className="w-full max-w-md rounded-lg py-10 px-6 lg:px-8 bg-slate-800">
+        <Layout className="flex justify-center items-center">
+            <div className="w-full max-w-md rounded-lg py-10 px-6 lg:px-8 bg-slate-900">
                 <div className="px-8">
                     <h2 className="text-center text-2xl font-bold leading-tight">Create a new account</h2>
 
@@ -45,7 +47,7 @@ const SignUp = () => {
                         className="font-medium"
                         >Name:</label>
                         <input
-                            className="flex w-full rounded-md border border-gray-600 bg-slate-900 py-2 px-3 
+                            className="flex w-full rounded-md border border-gray-600 bg-slate-950 py-2 px-3 
                             text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 
                             focus:ring-offset-1 text-gray-50 focus:ring-offset-gray-900"
                             type="text"
@@ -60,7 +62,7 @@ const SignUp = () => {
                         className="font-medium"
                         >Email:</label>
                         <input
-                            className="flex w-full rounded-md border border-gray-600 bg-slate-900 py-2 px-3 
+                            className="flex w-full rounded-md border border-gray-600 bg-slate-950 py-2 px-3 
                             text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 
                             focus:ring-offset-1 text-gray-50 focus:ring-offset-gray-900"
                             type="email"
@@ -75,7 +77,7 @@ const SignUp = () => {
                         className="font-medium"
                         >Password:</label>
                         <input
-                            className="flex w-full rounded-md border border-gray-600 bg-slate-900 py-2 px-3 
+                            className="flex w-full rounded-md border border-gray-600 bg-slate-950 py-2 px-3 
                             text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 
                             focus:ring-offset-1 text-gray-50 focus:ring-offset-gray-900"
                             type="password"

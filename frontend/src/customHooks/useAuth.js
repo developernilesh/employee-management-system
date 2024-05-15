@@ -4,12 +4,16 @@ import { useEffect, useState } from "react"
 export default () => {
     const [isLoggedIn,setIsLoggedIn] = useState()
 
+    const url = `${String(import.meta.env.VITE_BACKEND_URL)}`
+
     const verifyUserLogin = async() => {
         try {
-            const res = await axios.get('/api/auth/isLoggedin')
+            const res = await axios.get(`${url}/api/auth/isLoggedin`,{
+                withCredentials: true // Include credentials (cookies) in the request
+            })
             // console.log(res);
             const data = await res.data
-            // console.log(data);
+            // console.log("data",data);
             setIsLoggedIn(data)
             // console.log(isLoggedIn);
         } catch (error) {
@@ -19,9 +23,9 @@ export default () => {
 
     useEffect(() => {
       verifyUserLogin()
-    }, [isLoggedIn]);
+    }, []);
 
-    // console.log(isLoggedIn);
+    // console.log("isLoggedIn",isLoggedIn);
 
     return {isLoggedIn}
 }

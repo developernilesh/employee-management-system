@@ -11,12 +11,17 @@ const LogIn = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
 
+    const url = `${String(import.meta.env.VITE_BACKEND_URL)}`
+
     const Login = async(data) => {
         try {
-            const res = await axios.post('/api/auth/login',{...data})
+            const res = await axios.post(`${url}/api/auth/login`,{...data},{
+                withCredentials: true // Include credentials (cookies) in the request
+            })
             console.log(res);
             navigate('/');
             toast.success("Logged in successfully")
+
         } catch (error) {
             if (error.response) {
                 console.error(error.response.data);
@@ -32,8 +37,8 @@ const LogIn = () => {
     }
 
     return (
-        <Layout>
-            <div className="w-full max-w-md rounded-lg py-10 px-6 lg:px-8 bg-slate-800">
+        <Layout className="flex justify-center items-center">
+            <div className="w-full max-w-md rounded-lg py-10 px-6 lg:px-8 bg-slate-900">
                 <div className="px-8">
                     <h2 className="text-center text-2xl font-bold leading-tight">Sign in to your account</h2>
 
@@ -59,7 +64,7 @@ const LogIn = () => {
                             className="font-medium"
                             >Email:</label>
                             <input
-                                className="flex w-full rounded-md border border-gray-600 bg-slate-900 py-2 px-3 
+                                className="flex w-full rounded-md border border-gray-600 bg-slate-950 py-2 px-3 
                                 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 
                                 focus:ring-offset-1 text-gray-50 focus:ring-offset-gray-900"
                                 type="email"
@@ -74,7 +79,7 @@ const LogIn = () => {
                             className="font-medium"
                             >Password:</label>
                             <input
-                                className="flex w-full rounded-md border border-gray-600 bg-slate-900 py-2 px-3 
+                                className="flex w-full rounded-md border border-gray-600 bg-slate-950 py-2 px-3 
                                 placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 
                                 focus:ring-offset-1 text-gray-50 focus:ring-offset-gray-900"
                                 type="password"

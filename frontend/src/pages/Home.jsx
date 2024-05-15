@@ -1,10 +1,11 @@
 import React from "react";
-import { Layout } from "../components";
+import { Employees, Layout, Navbar } from "../components";
 
 const Home = () => {
   return (
     <Layout>
-      Home
+      <Navbar/>
+      <Employees/>
     </Layout>
   );
 };

@@ -8,7 +8,10 @@ const cookieParser = require('cookie-parser')
 app.use(cookieParser());
 
 const cors = require('cors');
-app.use(cors())
+app.use(cors({
+    origin: String(process.env.FRONTEND_URL), // Replace with your frontend URL
+    credentials: true // Enable sending cookies from frontend
+}))
 
 app.use(express.json());
 

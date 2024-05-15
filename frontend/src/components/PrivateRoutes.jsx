@@ -4,21 +4,21 @@ import useAuth from "../customHooks/useAuth";
 
 const PrivateRoutes = () => {
     const {isLoggedIn} = useAuth();
-    console.log(isLoggedIn);
+    // console.log(isLoggedIn);
 
-    return(isLoggedIn === undefined ? 
-      (
-          <p>Loading...</p>
-      ) : 
-      (
-        isLoggedIn === true ? 
-          (
-              <Outlet/>
-          ) : 
-          (
-              <Navigate to='/login'/>
-          )
-      )
+    return (isLoggedIn === undefined ? 
+        (
+            <p>Loading...</p>
+        ) : 
+        (
+            isLoggedIn === true ? 
+            (
+                <Outlet/>
+            ) : 
+            (
+                <Navigate to='/login'/>
+            )
+        )
     )
 };
 

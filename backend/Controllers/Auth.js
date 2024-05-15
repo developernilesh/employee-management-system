@@ -62,6 +62,19 @@ exports.login = async(req,res) => {
             })
         }
 
+        // check if user is already logged in
+        const token = req.cookies.token
+
+        if(token){
+            const isVerified = jwt.verify(token,process.env.JWT_SECRET)
+            if(isVerified){
+                return res.status(401).json({
+                    success:false,
+                    message: 'User is already Logged In'
+                })
+            }
+        }
+
         // check for registered user
         let user = await User.findOne({email})
 
@@ -84,7 +97,7 @@ exports.login = async(req,res) => {
                 payload,
                 process.env.JWT_SECRET,
                 {
-                    expiresIn:'2h',
+                    expiresIn:'24h',
                 }
             )
             
@@ -93,9 +106,10 @@ exports.login = async(req,res) => {
             user.password = undefined;
             
             const options = {
-                expires: new Date(Date.now() + 3*24*60*60*1000),
+                expires: new Date(Date.now() + 24*60*60*1000),
                 httpOnly:true,
             }
+
             res.cookie("token",token,options).status(200).json({
                 success:true,
                 token,
@@ -139,6 +153,7 @@ exports.logout = async(req,res) => {
 exports.isLoggedin = async(req,res) => {
     try {
         const token = req.cookies.token
+        
         if(!token){
             return res.json(false)
         }

@@ -1,12 +1,12 @@
 import React from "react";
-import { Layout } from "../components";
+import { EditProfileForm } from "../components";
 
 const EditProfile = () => {
-  return (
-    <Layout>
-      Edit Profile
-    </Layout>
-  );
+    return(
+        <div>
+            <EditProfileForm/>
+        </div>
+    );
 };
 
 export default EditProfile;

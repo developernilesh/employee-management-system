@@ -6,7 +6,7 @@ import { PrivateRoutes } from './components'
 function App() {
 
   return (
-    <div className='bg-black'>
+    <div className='bg-slate-950'>
       <Routes>
         <Route element={<PrivateRoutes/>}>
           <Route path='/' element={<Home/>}/>
