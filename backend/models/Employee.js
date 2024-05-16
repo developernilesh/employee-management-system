@@ -1,7 +1,17 @@
 const mongoose = require('mongoose');
 
 const employeSchema = new mongoose.Schema({
-    name:{
+    firstName:{
+        type: String,
+        required:true,
+        trim:true,
+    },
+    lastName:{
+        type: String,
+        required:true,
+        trim:true,
+    },
+    fullName:{
         type: String,
         required:true,
         trim:true,
@@ -19,6 +29,15 @@ const employeSchema = new mongoose.Schema({
         type:String,
         enum:["Male","Female","Other"],
         required:true
+    },
+    country:{
+        type:String,
+        required: true,
+    },
+    status:{
+        type: String,
+        enum:["Working","Resigned"],
+        default:"Working"
     },
     user:{
         type: mongoose.Schema.Types.ObjectId,

@@ -2,9 +2,9 @@ const Employee = require('../models/Employee')
 
 exports.createEmployee = async(req,res) => {
     try {
-        const {name,email,phn,gender} = req.body
+        const {firstName,lastName,email,phn,gender,country,status} = req.body
 
-        if(!name || !email || !phn || !gender){
+        if(!firstName || !lastName || !email || !phn || !gender || !country || status){
             return res.status(401).json({
                 success:false,
                 meassage:"Please fill all the details"
@@ -12,8 +12,8 @@ exports.createEmployee = async(req,res) => {
         }
 
         const employee = await Employee.create({
-            name,email,phn,gender,
-            user:req.user.id
+            firstName,lastName,fullName:`${firstName}{" "}${lastName}`,email,
+            phn,gender,country,status,user:req.user.id
         })
 
         return res.status(200).json({
@@ -33,7 +33,7 @@ exports.createEmployee = async(req,res) => {
 
 exports.getEmployees = async(req,res) => {
     try {
-        const allEmployees = await Employee.find({})
+        const allEmployees = await Employee.find().sort({createdAt: -1})
 
         if(!allEmployees){
             return res.status(401).json({
@@ -42,10 +42,7 @@ exports.getEmployees = async(req,res) => {
             })
         }
 
-        return res.status(200).json({
-            success:true,
-            allEmployees
-        })
+        return res.status(200).json(allEmployees)
 
     } catch (error) {
         console.error(error)
@@ -67,7 +64,7 @@ exports.getCurrentUserEmployees = async(req,res) => {
             })
         }
 
-        const currentUserEmployees = await Employee.find({user:req.user.id})
+        const currentUserEmployees = await Employee.find({user:req.user.id}).sort({createdAt: -1})
 
         if(!currentUserEmployees){
             return res.status(401).json({
@@ -76,10 +73,7 @@ exports.getCurrentUserEmployees = async(req,res) => {
             })
         }
 
-        return res.status(200).json({
-            success:true,
-            currentUserEmployees
-        })
+        return res.status(200).json(currentUserEmployees)
         
     } catch (error) {
         console.error(error)
@@ -130,11 +124,7 @@ exports.updateEmployee = async(req,res) => {
             })
         }
 
-        return res.status(200).json({
-            success:true,
-            message:"Employee updated succesfully",
-            updatedEmployee
-        })
+        return res.status(200).json(updatedEmployee)
         
     } catch (error) {
         console.error(error)

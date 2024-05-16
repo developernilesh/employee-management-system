@@ -4,12 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { url } from "../../config/url";
 
 const SignUp = () => {
     const { register, handleSubmit } = useForm()
     const navigate = useNavigate()
-
-    const url = `${String(import.meta.env.VITE_BACKEND_URL)}`
 
     const Signup = async(data) => {
         try {

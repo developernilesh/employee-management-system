@@ -3,21 +3,19 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FiEdit3 } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
+import useUserData from "../../customHooks/useUserData";
+import { url } from "../../config/url";
 
 const Navbar = () => {
     const [userInfo,setUserInfo] = useState('')
     const navigate = useNavigate()
 
-    const url = `${String(import.meta.env.VITE_BACKEND_URL)}`
+    const {userData} = useUserData(url)
 
     const getuserInfo = async() => {
         try {
-            const res = await axios.get(`${url}/api/user/prof`,{
-                withCredentials: true // Include credentials (cookies) in the request
-            })
-            const userData = await res.data;
             setUserInfo(userData);
-
+            
         } catch (error) {
             if (error.response) {
                 console.error(error.response.data);
@@ -34,7 +32,7 @@ const Navbar = () => {
 
     useEffect(() => {
       getuserInfo()
-    }, []);
+    }, [userData]);
 
 
     const handleLogout = async() => {

@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../Layout";
-import { FaUserAlt } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import useUserData from "../../customHooks/useUserData";
+import { url } from "../../config/url";
 
 const EditProfileForm = () => {
     const {register, handleSubmit, setValue} = useForm()
     const navigate = useNavigate()
     const [userInfo,setUserInfo] = useState('')
 
-    const url = `${String(import.meta.env.VITE_BACKEND_URL)}`
+    const {userData} = useUserData(url)
       
     const getuserInfo = async() => {
         try {
-            const res = await axios.get(`${url}/api/user/prof`,{
-                withCredentials: true // Include credentials (cookies) in the request
-            })
-            const userData = await res.data;
             setUserInfo(userData)
-            // Setting form values after fetching user data
+
             setValue("name", userData.name);
             setValue("email", userData.email);
   
@@ -40,14 +37,14 @@ const EditProfileForm = () => {
       
     useEffect(() => {
       getuserInfo()
-    }, []);
+    }, [userData]);
       
     const updateProf = async (data) => {
       try {
-        const res = await axios.put(`${url}/api/user/prof`,{...data},{
+        await axios.put(`${url}/api/user/prof`,{...data},{
             withCredentials: true // Include credentials (cookies) in the request
         });
-        // console.log(res);
+        
         toast.success("Profile updated successfully");
         navigate('/');
   

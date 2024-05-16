@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { url } from "../../config/url";
 
 const LogIn = () => {
     const { register, handleSubmit } = useForm()
@@ -11,14 +12,11 @@ const LogIn = () => {
 
     const [errorMessage, setErrorMessage] = useState('');
 
-    const url = `${String(import.meta.env.VITE_BACKEND_URL)}`
-
     const Login = async(data) => {
         try {
-            const res = await axios.post(`${url}/api/auth/login`,{...data},{
+            await axios.post(`${url}/api/auth/login`,{...data},{
                 withCredentials: true // Include credentials (cookies) in the request
             })
-            console.log(res);
             navigate('/');
             toast.success("Logged in successfully")
 

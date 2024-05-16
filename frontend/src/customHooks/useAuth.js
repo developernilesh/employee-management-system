@@ -1,10 +1,9 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { url } from "../config/url"
 
 export default () => {
     const [isLoggedIn,setIsLoggedIn] = useState()
-
-    const url = `${String(import.meta.env.VITE_BACKEND_URL)}`
 
     const verifyUserLogin = async() => {
         try {
