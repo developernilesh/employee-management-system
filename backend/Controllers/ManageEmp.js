@@ -4,15 +4,40 @@ exports.createEmployee = async(req,res) => {
     try {
         const {firstName,lastName,email,phn,gender,country,status} = req.body
 
-        if(!firstName || !lastName || !email || !phn || !gender || !country || status){
+        if(!firstName || !lastName || !email || !phn || !gender || !country || !status){
             return res.status(401).json({
                 success:false,
-                meassage:"Please fill all the details"
+                message:"Please fill all the details"
+            })
+        }
+
+        if(phn.toString().length < 10){
+            return res.status(401).json({
+                success:false,
+                message:"Phone no should contain at least 10 digits"
+            })
+        }
+
+        const existingMail = await Employee.findOne({email})
+
+        if(existingMail){
+            return res.status(400).json({
+                success:false,
+                message:'Email already exists',
+            })
+        }
+
+        const existingPhn = await Employee.findOne({phn})
+
+        if(existingPhn){
+            return res.status(400).json({
+                success:false,
+                message:'Phone no already exists',
             })
         }
 
         const employee = await Employee.create({
-            firstName,lastName,fullName:`${firstName}{" "}${lastName}`,email,
+            firstName,lastName,email,
             phn,gender,country,status,user:req.user.id
         })
 
@@ -111,6 +136,13 @@ exports.updateEmployee = async(req,res) => {
             })
         }
 
+        if(req.body.phn.toString().length < 10){
+            return res.status(401).json({
+                success:false,
+                message:"Phone no should contain at least 10 digits"
+            })
+        }
+
         const updatedEmployee = await Employee.findByIdAndUpdate(
             employeeId,
             req.body,
@@ -130,7 +162,7 @@ exports.updateEmployee = async(req,res) => {
         console.error(error)
         return res.status(500).json({
             success:false,
-            message:'Cannot update Employee',
+            message:error.message,
         })
     }
 }

@@ -5,7 +5,9 @@ import Layout from "./Layout";
 import Navbar from "./home/Navbar";
 import EditProfileForm from "./profile/EditProfileForm";
 import Employees from "./home/Employees";
-import AddEmpForm from "./home/AddEmpForm";
+import AddEmpForm from "./manageEmps/AddEmpForm";
+import EmployeeTable from "./manageEmps/EmployeeTable";
+import EditEmployee from "./manageEmps/EditEmployee";
 
 export{
     PrivateRoutes,
@@ -15,5 +17,7 @@ export{
     Navbar,
     EditProfileForm,
     Employees,
-    AddEmpForm
+    AddEmpForm,
+    EmployeeTable,
+    EditEmployee,
 }

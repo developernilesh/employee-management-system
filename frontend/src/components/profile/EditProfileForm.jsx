@@ -55,7 +55,7 @@ const EditProfileForm = () => {
     };
       
     return (
-      <Layout className="flex justify-center items-center ">
+      <Layout className="flex justify-center items-center">
         <div className="w-full max-w-md rounded-lg py-10 px-6 lg:px-8 bg-slate-900">
             <div className="flex flex-col items-center">
                 <div className="text-xl font-bold">Edit Your Profile</div>
