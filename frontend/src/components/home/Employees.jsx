@@ -57,18 +57,15 @@ const Employees = () => {
   console.log(emps);
 
   return (
-    <div className="w-full h-full flex justify-center items-center px-5 mt-5">
+    <div className="w-full h-full flex justify-center items-center px-2 md:px-5 overflow-auto">
         { 
           !loading ? 
           ( 
             <div className="w-full h-full justify-center items-center px-5">
               <div className="w-full lg:w-11/12 mx-auto text-gray-200">
-                <div className="w-full flex items-end justify-between pb-4">
-                  <div className="pl-1 text-lg md:text-xl font-semibold md:font-bold text-gray-200 italic">
-                    Your Employees:
-                  </div>
+                <div className="w-full flex items-end justify-end ">
 
-                  <div>
+                  <div className="w-full my-2 custom:my-0 flex justify-start custom:justify-end custom:translate-y-full pt-0.5">
                     <Link to='/addEmployee'>
                       <button
                         className="flex flex-row gap-1 justify-end items-center rounded-md bg-gradient-to-br from-indigo-600 to-indigo-800 
@@ -84,27 +81,28 @@ const Employees = () => {
                   emps.length === 0 ? (
                     <table className="w-full">
                       <thead>
-                       <tr className="text-center bg-slate-900">
-                         <th className="py-3 border border-gray-300">Sl.No.</th>
-                         <th className="py-3 border border-gray-300">Full Name</th>
-                         <th className="py-3 border border-gray-300">Email</th>
-                         <th className="py-3 border border-gray-300">Phone</th>
-                         <th className="py-3 border border-gray-300">Gender</th>
-                         <th className="py-3 border border-gray-300">Country</th>
-                         <th className="py-3 border border-gray-300">Status</th>
-                         <th className="py-3 border border-gray-300">Added On</th>
-                         <th className="py-3 border border-gray-300">Actions</th>
-                       </tr>
-                     </thead>
+                        <tr className="text-center bg-slate-900">
+                          <th className="py-3 border border-gray-300">Sl.No.</th>
+                          <th className="py-3 border border-gray-300">Full Name</th>
+                          <th className="py-3 border border-gray-300">Email</th>
+                          <th className="py-3 border border-gray-300">Phone</th>
+                          <th className="py-3 border border-gray-300">Gender</th>
+                          <th className="py-3 border border-gray-300">Country</th>
+                          <th className="py-3 border border-gray-300">Status</th>
+                          <th className="py-3 border border-gray-300">Added On</th>
+                          <th className="py-3 border border-gray-300">Actions</th>
+                        </tr>
+                      </thead>
                     </table>
                   ) : (
-                    (<EmployeeTable emps={emps} deleteEmp={deleteEmp}/>)
+
+                        <EmployeeTable emps={emps} deleteEmp={deleteEmp} />
                   )
                 }
               </div>
             </div>
             
-          ) : 
+          ): 
           (
             <button disabled type="button" className="mt-[20vh] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center">
               <svg aria-hidden="true" role="status" className="inline w-4 h-4 me-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,7 +113,8 @@ const Employees = () => {
             </button>
           )
         }
-    </div>);
+    </div>
+  );
 };
 
 export default Employees;

@@ -51,7 +51,7 @@ const Navbar = () => {
     
 
     return (
-        <div className="flex justify-between items-center py-3">
+        <div className="w-full flex justify-between items-center pt-1">
             <div className="flex gap-2 items-start">
                 <div className="mt-1 rounded-full w-[45px]">
                     <img src={`https://api.dicebear.com/5.x/initials/svg?seed=${userInfo.name}`}

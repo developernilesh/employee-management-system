@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom styles for the number input field */
+.custom-number-input {
+  -moz-appearance: textfield; /* Remove default Firefox styling */
+}
+
+.custom-number-input::-webkit-inner-spin-button, 
+.custom-number-input::-webkit-outer-spin-button {
+  opacity: 1; /* Ensure spinners are visible */
+  display: block; /* Ensure they are always displayed */
+  margin: 0; /* Remove any default margin */
+  color: white;
+  background-color: gray;
+}
+
+
