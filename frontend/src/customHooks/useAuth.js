@@ -11,8 +11,10 @@ export default () => {
                 withCredentials: true // Include credentials (cookies) in the request
             })
             // console.log(res);
-            const data = await res.data
-            // console.log("data",data);
+
+            const data = await res.data.success
+            console.log("data",data);
+
             setIsLoggedIn(data)
             // console.log(isLoggedIn);
         } catch (error) {

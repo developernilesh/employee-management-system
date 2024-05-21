@@ -64,17 +64,9 @@ exports.login = async(req,res) => {
 
         // check if user is already logged in
         const token = req.cookies.token
-        console.log(token);
 
         if(token){
             const isVerified = jwt.verify(token,process.env.JWT_SECRET)
-            console.log(isVerified);
-            if(!isVerified){
-                return res.status(401).json({
-                    success:false,
-                    message: 'Cannot verify user token'
-                }) 
-            }
             if(isVerified){
                 return res.status(401).json({
                     success:false,
@@ -167,7 +159,7 @@ exports.isLoggedin = async(req,res) => {
         
         if(!token){
             return res.json({
-                "success":false,
+                success:false,
                 "message": "cannot get token",
             })
         }
@@ -181,7 +173,6 @@ exports.isLoggedin = async(req,res) => {
                 success: false,
                 "message":"cannot get isVerified",
                 "token": token,
-                "key": secret,
             })
         }
         return res.json({
