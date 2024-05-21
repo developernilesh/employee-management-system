@@ -9,8 +9,8 @@ app.use(cookieParser());
 
 const cors = require('cors');
 app.use(cors({
-    origin: String(process.env.FRONTEND_URL), // Replace with your frontend URL
-    credentials: true // Enable sending cookies from frontend
+    origin: 'https://employee-management-system-user-cmh3qu4ya.vercel.app/',
+    credentials: true
 }))
 
 app.use(express.json());
