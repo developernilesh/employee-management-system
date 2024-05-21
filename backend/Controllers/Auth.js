@@ -64,9 +64,11 @@ exports.login = async(req,res) => {
 
         // check if user is already logged in
         const token = req.cookies.token
+        console.log(token);
 
         if(token){
             const isVerified = jwt.verify(token,process.env.JWT_SECRET)
+            console.log(isVerified);
             if(isVerified){
                 return res.status(401).json({
                     success:false,
