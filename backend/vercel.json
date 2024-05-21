@@ -6,6 +6,6 @@
     }],
     "routes": [{ 
         "src": "/(.*)", 
-        "destination": "/" 
+        "dest": "/" 
     }]
 }
