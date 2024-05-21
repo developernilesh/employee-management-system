@@ -98,7 +98,7 @@ const EmployeeTable = ({emps,deleteEmp}) => {
     <div className="w-full mb-10">
       <div className="w-full flex justify-start">
         <input type="text" value={globalFilter || ""} onChange={(e) => setGlobalFilter(e.target.value)} placeholder="Search here 🔍"
-          className="text-base font-medium text-center text-gray-100 bg-slate-700 mb-3 py-2 rounded-md"
+          className="z-10 text-base font-medium text-center text-gray-100 bg-slate-700 mb-3 py-2 rounded-md"
         />
       </div>
       <table className="w-full overflow-auto" {...getTableProps()}>

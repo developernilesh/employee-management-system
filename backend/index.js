@@ -23,3 +23,7 @@ app.use('/api', user)
 app.listen(PORT, () => {
     console.log(`server started at port: ${PORT}`);
 })
+
+app.get("/", (req, res) => res.send("Emplyee Management System"));
+
+module.exports = app;

@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../Layout";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { url } from "../../config/url";
+import {AiOutlineEye,AiOutlineEyeInvisible} from "react-icons/ai"
 
 const SignUp = () => {
     const { register, handleSubmit } = useForm()
     const navigate = useNavigate()
+    const [showPassword,setShowPassword] = useState(false)
 
     const Signup = async(data) => {
         try {
@@ -70,20 +72,25 @@ const SignUp = () => {
                         />
                     </div>
 
-                    <div>
-                        <label
-                        htmlFor="password"
+                    <label className="w-full relative">
+                        <div
                         className="font-medium"
-                        >Password:</label>
+                        >Password:</div>
                         <input
                             className="flex w-full rounded-md border border-gray-600 bg-slate-950 py-2 px-3 
-                            text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 
+                            placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 
                             focus:ring-offset-1 text-gray-50 focus:ring-offset-gray-900"
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             placeholder="Enter your password"
                             {...register("password")}
                         />
-                    </div>
+                        <span onClick={() => setShowPassword((prev)=>!prev)}
+                        className="absolute right-3 top-[50%] cursor-pointer">
+                            {showPassword ? 
+                            <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF"/> : 
+                            <AiOutlineEye fontSize={24} fill="#AFB2BF"/> }
+                        </span>
+                    </label>
 
                     <div>
                         <button

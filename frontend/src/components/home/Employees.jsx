@@ -79,7 +79,7 @@ const Employees = () => {
                 </div>
                 {
                   emps.length === 0 ? (
-                    <table className="w-full">
+                    <table className="w-full mt-12">
                       <thead>
                         <tr className="text-center bg-slate-900">
                           <th className="py-3 border border-gray-300">Sl.No.</th>
@@ -96,7 +96,7 @@ const Employees = () => {
                     </table>
                   ) : (
 
-                        <EmployeeTable emps={emps} deleteEmp={deleteEmp} />
+                    <EmployeeTable emps={emps} deleteEmp={deleteEmp} />
                   )
                 }
               </div>
