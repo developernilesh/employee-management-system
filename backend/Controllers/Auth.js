@@ -163,15 +163,28 @@ exports.isLoggedin = async(req,res) => {
         const token = req.cookies.token
         
         if(!token){
-            return res.json(false)
+            return res.json({
+                "success":false,
+                "message": "cannot get token",
+            })
         }
 
-        const isVerified = jwt.verify(token,process.env.JWT_SECRET)
+        const secret = process.env.JWT_SECRET
+
+        const isVerified = jwt.verify(token,secret)
         
         if(!isVerified){
-            return res.json(false)
+            return res.json({
+                success: false,
+                "message":"cannot get isVerified",
+                "token": token,
+                "key": secret,
+            })
         }
-        return res.json(true)
+        return res.json({
+            success: true,
+            "isVerified": isVerified,
+        })
 
     } catch (error) {
         console.error(error)
