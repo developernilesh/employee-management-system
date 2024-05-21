@@ -11,6 +11,7 @@ const Navbar = () => {
     const navigate = useNavigate()
 
     const {userData} = useUserData(url)
+    console.log(userData);
 
     const getuserInfo = async() => {
         try {
