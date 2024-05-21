@@ -54,8 +54,6 @@ const Employees = () => {
     }
   }
 
-  console.log(emps);
-
   return (
     <div className="w-full h-full flex justify-center items-center px-2 md:px-5 overflow-auto">
         { 

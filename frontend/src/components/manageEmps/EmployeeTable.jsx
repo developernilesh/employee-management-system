@@ -9,7 +9,6 @@ import Tooltip from "../Tooltip";
 
 const EmployeeTable = ({emps,deleteEmp}) => {
   const [pgVal,setPgVal] = useState(1)
-  console.log(pgVal);
   
   const tableColumn = useMemo(() => [
     {

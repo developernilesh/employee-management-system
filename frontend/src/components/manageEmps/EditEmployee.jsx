@@ -15,8 +15,6 @@ const EditEmployee = () => {
 
     const {viewEmpData} = useViewEmp(url,id)
 
-    // console.log(viewEmpData);
-
     const getEmpInfo = () => {
         try {
             if(!viewEmpData) return;

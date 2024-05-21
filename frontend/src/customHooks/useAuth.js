@@ -13,10 +13,11 @@ export default () => {
             // console.log(res);
 
             const data = await res.data.success
-            console.log("data",data);
+            // console.log("data",data);
 
             setIsLoggedIn(data)
             // console.log(isLoggedIn);
+            
         } catch (error) {
             console.error(error)
         }

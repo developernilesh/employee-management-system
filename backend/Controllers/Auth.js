@@ -139,11 +139,18 @@ exports.login = async(req,res) => {
 
 exports.logout = async(req,res) => {
     try {
-        res.clearCookie('token')
-        return res.status(200).json({
-            "success":true,
-            "message":"Logged Out Successfully"
-        })
+        const options = {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None',
+            path: '/'
+        };
+
+        res.clearCookie('token', options).status(200).json({
+            success: true,
+            message: "Logged Out Successfully"
+        });
+        
     } catch (error) {
         console.error(error)
         return res.status(401).json({

@@ -58,7 +58,7 @@ const LogIn = () => {
                 </div>
                 
                 <form onSubmit={handleSubmit(Login)} 
-                className="mt-4 flex flex-col gap-2">
+                className="mt-4 flex flex-col gap-[2px]">
                         <div>
                             <label
                             htmlFor="email"
@@ -72,6 +72,9 @@ const LogIn = () => {
                                 placeholder="Enter your email"
                                 {...register("email")}
                             />
+                        </div>
+                        <div className="w-full flex items-end mb-[6px]">
+                            <span className="italic">test email:{" "}</span>test@admin.com
                         </div>
 
                         <label className="w-full relative">
@@ -93,6 +96,9 @@ const LogIn = () => {
                                 <AiOutlineEye fontSize={24} fill="#AFB2BF"/> }
                             </span>
                         </label>
+                        <div className="w-full flex items-end mb-[6px]">
+                            <span className="italic">test password:{" "}</span>12345678
+                        </div>
 
                         <div>
                             <button
@@ -118,9 +124,6 @@ const LogIn = () => {
                     </div>
                 </form>
             </div>
-            
-
-            
         </Layout>
     );
 };
