@@ -69,6 +69,12 @@ exports.login = async(req,res) => {
         if(token){
             const isVerified = jwt.verify(token,process.env.JWT_SECRET)
             console.log(isVerified);
+            if(!isVerified){
+                return res.status(401).json({
+                    success:false,
+                    message: 'Cannot verify user token'
+                }) 
+            }
             if(isVerified){
                 return res.status(401).json({
                     success:false,
