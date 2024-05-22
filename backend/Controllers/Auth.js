@@ -139,7 +139,6 @@ exports.login = async(req,res) => {
 exports.logout = async(req,res) => {
     try {
         const options = {
-            path: '/',
             domain: 'employee-management-system-server-lovat.vercel.app',
             httpOnly: true,
             sameSite: 'None',
