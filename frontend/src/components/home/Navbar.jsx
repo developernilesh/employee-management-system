@@ -37,7 +37,7 @@ const Navbar = () => {
 
     const handleLogout = async() => {
         try {
-            const res = await axios.post(`${url}/api/auth/logout`,{
+            const res = await axios.get(`${url}/api/auth/logout`,{
                 withCredentials: true // Include credentials (cookies) in the request
             })
             const data = res.data;
