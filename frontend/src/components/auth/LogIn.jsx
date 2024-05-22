@@ -74,7 +74,7 @@ const LogIn = () => {
                             />
                         </div>
                         <div className="w-full flex justify-end mb-[6px]">
-                            <span className="italic">test email{" : "}</span>test@admin.com
+                            <span className="italic">test email</span>{" : "}test@admin.com
                         </div>
 
                         <label className="w-full relative">
@@ -97,7 +97,7 @@ const LogIn = () => {
                             </span>
                         </label>
                         <div className="w-full flex justify-end mb-[6px]">
-                            <span className="italic">test password{" : "}</span>12345678
+                            <span className="italic">test password</span>{" : "}12345678
                         </div>
 
                         <div>
