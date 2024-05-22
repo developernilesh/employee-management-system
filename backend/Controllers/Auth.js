@@ -140,14 +140,14 @@ exports.login = async(req,res) => {
 exports.logout = async(req,res) => {
     try {
         const options = {
-            expires: new Date(Date.now() - 1000),
+            expires: new Date(Date.now()+1),
             httpOnly:true,
             secure: true,
             sameSite: 'None',
             path: '/' 
         }
 
-        res.cookie("token",null,options).status(200).json({
+        res.cookie("token",'',options).status(200).json({
             success: true,
             message: "Logged Out Successfully"
         });
