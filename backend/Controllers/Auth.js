@@ -106,7 +106,7 @@ exports.login = async(req,res) => {
             user.password = undefined;
             
             const options = {
-                expires: new Date(Date.now() + 24*60*60*1000),
+                expires: new Date(Date.now() + 30*1000),
                 httpOnly:true,
                 secure: true,
                 sameSite: 'None',
@@ -145,7 +145,7 @@ exports.logout = async(req,res) => {
             sameSite: 'None',
         }
 
-        res.cookie("token",'',options).status(200).json({
+        res.clearCookie("token").status(200).json({
             success: true,
             message: "Logged Out Successfully"
         });
