@@ -19,7 +19,7 @@ const LogIn = () => {
             const res = await axios.post(`${url}/api/auth/login`,{...data},{
                 withCredentials: true // Include credentials (cookies) in the request
             }) 
-            console.log(res);
+            // console.log(res);
             navigate('/');
             toast.success("Logged in successfully")
 

@@ -18,8 +18,6 @@ const useUserData = (url) => {
         fetchData()
     },[])
 
-    console.log(userData);
-
     return {userData};
 };
 

@@ -110,7 +110,6 @@ exports.login = async(req,res) => {
                 httpOnly:true,
                 secure: true,
                 sameSite: 'None',
-                path: '/' 
             }
 
             res.cookie("token",token,options).status(200).json({
@@ -144,7 +143,6 @@ exports.logout = async(req,res) => {
             httpOnly:true,
             secure: true,
             sameSite: 'None',
-            path: '/' 
         }
 
         res.cookie("token",'',options).status(200).json({
