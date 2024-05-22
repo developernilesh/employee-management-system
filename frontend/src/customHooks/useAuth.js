@@ -1,9 +1,12 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { url } from "../config/url"
+import { useLocation } from "react-router-dom"
 
 export default () => {
     const [isLoggedIn,setIsLoggedIn] = useState()
+
+    const location = useLocation()
 
     const verifyUserLogin = async() => {
         try {
@@ -25,9 +28,7 @@ export default () => {
 
     useEffect(() => {
       verifyUserLogin()
-    }, []);
-
-    // console.log("isLoggedIn",isLoggedIn);
+    }, [location.pathname]);
 
     return {isLoggedIn}
 }

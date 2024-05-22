@@ -55,7 +55,12 @@ const EditEmployee = () => {
         } catch (error) {
             if (error.response) {
                 console.error(error.response.data);
+                if(error.response.data.message==="Something went wrong while verifying the token"){
+                    toast.error("User Session Expired")
+                    navigate('/login')
+                }else{
                 setErr(error.response.data.message);
+                }
             } else if (error.request) {
               console.error(error.request);
               setErr("Network error. Please try again.");

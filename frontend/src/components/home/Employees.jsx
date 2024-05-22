@@ -4,14 +4,19 @@ import axios from "axios"
 import toast from "react-hot-toast";
 import EmployeeTable from "../manageEmps/EmployeeTable";
 import useEmpData from "../../customHooks/useEmpData";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import useAuth from "../../customHooks/useAuth";
 
 const Employees = () => {
   const [emps, setEmps] = useState([])
   const [loading, setLoading] = useState('')
 
   const {empData} = useEmpData(url)
+  const {isLoggedIn} = useAuth()
+  console.log(isLoggedIn);
+
+  const navigate = useNavigate()
 
   // console.log(empData);
 
@@ -32,7 +37,12 @@ const Employees = () => {
   const handleFetchError = (error) => {
     if (error.response) {
       console.error(error.response.data);
-      toast.error(error.response.data.message);
+      if(error.response.data.message==="Something went wrong while verifying the token"){
+        toast.error("User Session Expired")
+        navigate('/login')
+      }else{
+        toast.error(error.response.data.message);
+      }
     } else if (error.request) {
       console.error(error.request);
       toast.error("Network error. Please try again.");
@@ -44,6 +54,10 @@ const Employees = () => {
 
   const deleteEmp = async(id) => {
     try {
+      console.log(isLoggedIn);
+      if(!isLoggedIn){
+        navigate('/login');
+      }
       await axios.delete(`${url}/api/employee/deleteEmployee/${id}`,{withCredentials:true})
       toast.success("Employee Deleted Successfully")
       // setEmps(emps.filter(emp => emp._id !== id))
