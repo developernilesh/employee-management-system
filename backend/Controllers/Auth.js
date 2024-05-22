@@ -106,7 +106,7 @@ exports.login = async(req,res) => {
             user.password = undefined;
             
             const options = {
-                expires: new Date(Date.now() + 30*1000),
+                expires: new Date(Date.now() + 60*1000),
                 httpOnly:true,
                 secure: true,
                 sameSite: 'None',
@@ -139,13 +139,13 @@ exports.login = async(req,res) => {
 exports.logout = async(req,res) => {
     try {
         const options = {
-            expires: new Date(Date.now()+1),
-            httpOnly:true,
+            expires: new Date(0), // Set to a very old date for deletion
+            httpOnly: true,
             secure: true,
             sameSite: 'None',
         }
 
-        res.clearCookie("token",'',options).status(200).json({
+        res.cookie("token",'',options).status(200).json({
             success: true,
             message: "Logged Out Successfully"
         });
