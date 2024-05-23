@@ -138,7 +138,7 @@ exports.login = async(req,res) => {
 
 exports.logout = async(req,res) => {
     try {
-        const loggedInUserId = req.user._id
+        const loggedInUserId = req.user.id
 
         console.log(loggedInUserId);
 
