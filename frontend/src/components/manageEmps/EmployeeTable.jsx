@@ -166,6 +166,7 @@ const EmployeeTable = ({emps,deleteEmp}) => {
               <span>Go to Page{" : "}</span>
               <select value={pgVal} onChange={moveToPg}
               className="bg-slate-700 outline-none ">
+                <option value="">-Select-</option>
                 {pageOptions.map((i) => (
                   <option key={i} value={i + 1}>
                     {i + 1}
