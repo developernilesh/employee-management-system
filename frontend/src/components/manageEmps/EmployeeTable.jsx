@@ -8,7 +8,7 @@ import { FaAngleLeft, FaAngleRight, FaAnglesRight,FaAnglesLeft } from "react-ico
 import Tooltip from "../Tooltip";
 
 const EmployeeTable = ({emps,deleteEmp}) => {
-  const [pgVal,setPgVal] = useState(1)
+  const [pgVal,setPgVal] = useState()
   
   const tableColumn = useMemo(() => [
     {
