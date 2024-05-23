@@ -121,7 +121,7 @@ exports.login = async(req,res) => {
         }
         else{
             // password do not match
-            return res.status(401).json({
+            return res.status(403).json({
                 success:false,
                 message:'You have entered incorrect password'
             })
@@ -129,7 +129,7 @@ exports.login = async(req,res) => {
     } 
     catch (error) {
         console.error(error)
-        return res.status(500).json({
+        res.status(500).json({
             success:false,
             message:'Login failure'
         })
@@ -138,45 +138,13 @@ exports.login = async(req,res) => {
 
 exports.logout = async(req,res) => {
     try {
-        const loggedInUserId = req.user.id
-
-        console.log(loggedInUserId);
-
-        if (!loggedInUserId) {
-            return res.status(401).json({
-                success:false,
-                message: "User is not logged in"
-            })
-        }
-
-        const user = await User.findById(loggedInUserId)
-
-        if (loggedInUserId.toString() !== user._id.toString()) {
-            // console.log(userId);
-            // console.log(loggedInUser._id);
-            return res.status(401).json({
-                success:false,
-                message: 'You can only log out yourself'
-            })
-        }
-
-        if (!user) {
-            return res.status(401).json({
-                success:false,
-                message: `User doesn't exist`
-            })        
-        }
-
-        // console.log(req.cookies);
-        // remove the token from cookies and set it to an empty string
-
-        delete req.cookies.token
-
         // const options = {
         //     secure: true,
         //     sameSite: 'None',
         //     domain: 'employee-management-system-server-lovat.vercel.app',
-        // } clearCookie("token",options)
+        // } clearCookie("token",options).
+
+        delete req.cookies.token
 
         res.status(200).json({
             success: true,
