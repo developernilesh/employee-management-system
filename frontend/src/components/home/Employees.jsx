@@ -8,15 +8,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoMdAddCircleOutline } from "react-icons/io";
 
 const Employees = () => {
-  const [emps, setEmps] = useState([])
-  const [loading, setLoading] = useState('')
+  const [emps, setEmps] = useState()
+  const [loading, setLoading] = useState(true)
 
   const {empData} = useEmpData(url)
   const navigate = useNavigate()
 
   useEffect(() => {
     const getEmps = async () => {
-      setLoading(true);
       try {
         setEmps(empData);
       } catch (error) {

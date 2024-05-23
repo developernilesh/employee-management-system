@@ -140,15 +140,16 @@ exports.logout = async(req,res) => {
     try {
         // delete req.cookies.token
 
+        const domain = process.env.COOKIE_DOMAIN
+
         const options = {
-            expires: new Date(0),
             httpOnly: true,
             secure: true,
             sameSite: 'None',
-            domain: 'employee-management-system-server-lovat.vercel.app',
+            domain: domain,
         } 
 
-        res.cookie("token",'',options).status(200).json({
+        res.clearCookie("token",options).status(200).json({
             success: true,
             message: "Logged Out Successfully"
         });

@@ -8,9 +8,13 @@ const cookieParser = require('cookie-parser')
 app.use(cookieParser());
 
 const cors = require('cors');
+
+const origin = String(process.env.FRONT_END_URL)
+console.log(origin);
+
 app.use(cors({
-    origin: 'https://employee-management-system-user.vercel.app',
     // origin: 'http://localhost:5173',
+    origin: origin,
     credentials: true
 }))
 
