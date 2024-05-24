@@ -141,15 +141,17 @@ exports.logout = async(req,res) => {
         // delete req.cookies.token
 
         const domain = process.env.COOKIE_DOMAIN
+        console.log(domain);
 
         const options = {
+            expires: new Date(Date.now()),
             httpOnly: true,
             secure: true,
             sameSite: 'None',
             domain: domain,
         } 
 
-        res.clearCookie("token",options).status(200).json({
+        res.cookie("token",'',options).status(200).json({
             success: true,
             message: "Logged Out Successfully"
         });
