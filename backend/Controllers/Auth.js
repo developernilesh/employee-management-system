@@ -97,7 +97,7 @@ exports.login = async(req,res) => {
                 payload,
                 process.env.JWT_SECRET,
                 {
-                    expiresIn:'24h',
+                    expiresIn:'2h',
                 }
             )
             
@@ -106,7 +106,7 @@ exports.login = async(req,res) => {
             user.password = undefined;
             
             const options = {
-                expires: new Date(Date.now() + 24*60*60*1000),
+                expires: new Date(Date.now() + 2*60*60*1000),
                 httpOnly:true,
                 secure: true,
                 sameSite: 'None',
